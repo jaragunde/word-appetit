@@ -25,6 +25,8 @@ var Player = GameEntity.extend({
     //letter placeholders: positions where letters should be drawn
     //when they are being carried by the player
     letterPlaceholders: [],
+    lettersPerRow: 0,
+    lettersHeight: 0,
 
     //plate width, it's configurable because it impacts in the difficulty
     plateW: 80,
@@ -52,6 +54,7 @@ var Player = GameEntity.extend({
             x = Math.floor(letterW / 2);
             y -= letterW;
         }
+        this.lettersPerRow = Math.floor(this.plateW / letterW);
 
         this._super(ctx);
     },
@@ -70,18 +73,22 @@ var Player = GameEntity.extend({
     collision: function (object) {
         if(object.type == 'letter') {
             this.letters.push(object);
+            this.lettersHeight =
+                    Math.floor(this.letters.length / this.lettersPerRow);
         }
     },
 
     //bounding box for player is redefined
     //only collisions with the plate must be detected
     getBoundingBox: function () {
-        return {
+        var box = {
             left: this.x - this.plateHW,
             right: this.x + this.plateHW,
-            top: this.y + this.sprite.cy,
-            bottom: this.y + this.sprite.cy + 2
+            //as the letters tower grows, the bounding box is pushed higher
+            top: this.y + this.sprite.cy - this.lettersHeight * 16,
         };
+        box.bottom = box.top + 2; //plate is 2px wide
+        return box;
     },
 
     draw: function () {
