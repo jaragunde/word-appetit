@@ -19,6 +19,9 @@ var Player = GameEntity.extend({
         h: 119,
     }),
 
+    //letters in the plate
+    letters: [],
+
     init: function(ctx, sheet) {
         this.sprite.sheet = sheet;
 
@@ -32,6 +35,13 @@ var Player = GameEntity.extend({
         }
         if(inputArray.right) {
             this.x += this.speed;
+        }
+    },
+
+    //on collision with a letter, the letter is stored
+    collision: function (object) {
+        if(object.type == 'letter') {
+            this.letters.push(object);
         }
     },
 
