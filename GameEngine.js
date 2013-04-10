@@ -5,7 +5,8 @@ var GameEngine = Class.extend({
     //pointers to canvas, context and sheet
     canvas: null,
     ctx: null,
-    sheet: null,
+    sheet1: null,
+    sheet2: null,
 
     //pointers to game objects
     player: null,
@@ -40,8 +41,10 @@ var GameEngine = Class.extend({
         this.ctx = this.canvas.getContext('2d');
 
         //sprite sheet
-        this.sheet = new Image();
-        this.sheet.src = "resources/walk-sequence.png";
+        this.sheet1 = new Image();
+        this.sheet1.src = "resources/walk-sequence.png";
+        this.sheet2 = new Image();
+        this.sheet2.src = "resources/character-stand.png";
 
         //input events
         this.canvas.addEventListener('keydown', function (event) {
@@ -50,6 +53,9 @@ var GameEngine = Class.extend({
         this.canvas.addEventListener('keyup', function (event) {
             self.keyManager(event);
         });
+
+        //player object
+        this.player = new Player(this.ctx, this.sheet2);
 
         //periodically invoke update function
         window.setInterval(function () {
@@ -91,6 +97,14 @@ var GameEngine = Class.extend({
     },
 
     update: function () {
+        //update player
+        this.player.update(this.inputArray);
+
+        //clear old image
+        this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height);
+
+        //draw player
+        this.player.draw();
 
         if(this.fpsCounter) {
             //code from @Phrogz at http://stackoverflow.com/questions/4787431/check-fps-in-js
