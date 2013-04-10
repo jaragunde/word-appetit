@@ -55,4 +55,11 @@ var Player = GameEntity.extend({
             bottom: this.y + this.sprite.cy + 2
         };
     },
+
+    draw: function () {
+        this.ctx.fillRect(this.x + this.sprite.cx, this.y + this.sprite.cy,
+                this.sprite.w, 2);
+
+        this._super();
+    },
 });
