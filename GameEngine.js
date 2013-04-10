@@ -8,9 +8,11 @@ var GameEngine = Class.extend({
     sheet1: null,
     sheet2: null,
     sheet3: null,
+    sheet4: null,
 
     //pointers to game objects
     player: null,
+    customer: null,
     letters: [],
 
     //object containing the state of the input keys
@@ -49,6 +51,8 @@ var GameEngine = Class.extend({
         this.sheet2.src = "resources/character-stand.png";
         this.sheet3 = new Image();
         this.sheet3.src = "resources/alphabet.png";
+        this.sheet4 = new Image();
+        this.sheet4.src = "resources/character-sitting.png";
 
         //input events
         this.canvas.addEventListener('keydown', function (event) {
@@ -58,8 +62,9 @@ var GameEngine = Class.extend({
             self.keyManager(event);
         });
 
-        //player object
+        //player and customer objects
         this.player = new Player(this.ctx, this.sheet2);
+        this.customer = new Customer(this.ctx, this.sheet4);
 
         //periodically invoke update function
         window.setInterval(function () {
@@ -127,6 +132,9 @@ var GameEngine = Class.extend({
 
         //draw player
         this.player.draw();
+
+        //draw customer
+        this.customer.draw();
 
         //draw letters in next position, or remove if destroyed
         for(var i in this.letters) {
