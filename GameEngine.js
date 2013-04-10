@@ -7,9 +7,11 @@ var GameEngine = Class.extend({
     ctx: null,
     sheet1: null,
     sheet2: null,
+    sheet3: null,
 
     //pointers to game objects
     player: null,
+    letters: [],
 
     //object containing the state of the input keys
     inputArray: {
@@ -45,6 +47,8 @@ var GameEngine = Class.extend({
         this.sheet1.src = "resources/walk-sequence.png";
         this.sheet2 = new Image();
         this.sheet2.src = "resources/character-stand.png";
+        this.sheet3 = new Image();
+        this.sheet3.src = "resources/alphabet.png";
 
         //input events
         this.canvas.addEventListener('keydown', function (event) {
@@ -100,11 +104,33 @@ var GameEngine = Class.extend({
         //update player
         this.player.update(this.inputArray);
 
+        //update letters
+        for(var i in this.letters) {
+            this.letters[i].update();
+        }
+
+        //randomly spawn a letter
+        if(Math.random() < 0.1) {
+            this.letters.push(new Letter(this.ctx, this.sheet3,
+                    Math.floor(Math.random() * 640), 10));
+        }
+
         //clear old image
         this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height);
 
         //draw player
         this.player.draw();
+
+        //draw letters in next position, or remove if destroyed
+        for(var i in this.letters) {
+            if(this.letters[i].destroyed) {
+                //FIXME: is this operation efficient?
+                this.letters.splice(i, 1);
+            }
+            else {
+                this.letters[i].draw();
+            }
+        }
 
         if(this.fpsCounter) {
             //code from @Phrogz at http://stackoverflow.com/questions/4787431/check-fps-in-js
