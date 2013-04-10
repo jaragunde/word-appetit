@@ -34,4 +34,15 @@ var Player = GameEntity.extend({
             this.x += this.speed;
         }
     },
+
+    //bounding box for player is redefined
+    //only collisions with the plate must be detected
+    getBoundingBox: function () {
+        return {
+            left: this.x + this.sprite.cx,
+            right: this.x + this.sprite.cx + this.sprite.w,
+            top: this.y + this.sprite.cy,
+            bottom: this.y + this.sprite.cy + 2
+        };
+    },
 });

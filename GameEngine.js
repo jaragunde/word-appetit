@@ -107,6 +107,13 @@ var GameEngine = Class.extend({
         //update letters
         for(var i in this.letters) {
             this.letters[i].update();
+
+            //detect collisions between letters and the player
+            if(this.detectCollision(this.letters[i].getBoundingBox(),
+                    this.player.getBoundingBox())) {
+                    this.player.collision(this.letters[i]);
+                    this.letters[i].collision(this.player);
+            }
         }
 
         //randomly spawn a letter
