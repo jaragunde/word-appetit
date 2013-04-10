@@ -22,8 +22,14 @@ var Player = GameEntity.extend({
     //letters in the plate
     letters: [],
 
+    //plate width, it's configurable because it impacts in the difficulty
+    plateW: 80,
+
     init: function(ctx, sheet) {
         this.sprite.sheet = sheet;
+
+        //store plate half width, to speed calculations
+        this.plateHW = Math.floor(this.plateW / 2);
 
         this._super(ctx);
     },
@@ -49,17 +55,19 @@ var Player = GameEntity.extend({
     //only collisions with the plate must be detected
     getBoundingBox: function () {
         return {
-            left: this.x + this.sprite.cx,
-            right: this.x + this.sprite.cx + this.sprite.w,
+            left: this.x - this.plateHW,
+            right: this.x + this.plateHW,
             top: this.y + this.sprite.cy,
             bottom: this.y + this.sprite.cy + 2
         };
     },
 
     draw: function () {
-        this.ctx.fillRect(this.x + this.sprite.cx, this.y + this.sprite.cy,
-                this.sprite.w, 2);
+        //draw plate
+        this.ctx.fillRect(this.x - this.plateHW, this.y + this.sprite.cy,
+                this.plateW, 2);
 
+        //draw sprite
         this._super();
     },
 });
