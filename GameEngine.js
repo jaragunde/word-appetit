@@ -123,6 +123,13 @@ var GameEngine = Class.extend({
             }
         }
 
+        //detect collisions between the customer and the player
+        if(this.detectCollision(this.customer.getBoundingBox(),
+                this.player.getBoundingBox())) {
+                this.player.collision(this.customer);
+                this.customer.collision(this.player);
+        }
+
         //randomly spawn a letter
         if(Math.random() < 0.1) {
             this.letters.push(new Letter(this.ctx, this.sheet3,

@@ -8,6 +8,9 @@ var Customer = GameEntity.extend({
 
     type: 'customer',
 
+    //letters on the table
+    letters: [],
+
     //define the sprite on init because there is only one
     sprite: new Sprite({
         x: 0,

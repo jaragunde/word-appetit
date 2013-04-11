@@ -46,6 +46,11 @@ var Player = GameEntity.extend({
             this.lettersHeight =
                     Math.floor(this.letters.length / this.lettersPerRow);
         }
+        if(object.type == 'customer') {
+            object.letters = object.letters.concat(this.plate.letters);
+            this.plate.letters = [];
+            this.plate.lettersHeight = 0;
+        }
     },
 
     draw: function () {
