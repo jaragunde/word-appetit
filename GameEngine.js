@@ -12,6 +12,7 @@ var GameEngine = Class.extend({
 
     //pointers to game objects
     player: null,
+    plate: null,
     customer: null,
     letters: [],
 
@@ -62,8 +63,9 @@ var GameEngine = Class.extend({
             self.keyManager(event);
         });
 
-        //player and customer objects
-        this.player = new Player(this.ctx, this.sheet2);
+        //player, plate and customer objects
+        this.plate = new Plate(this.ctx);
+        this.player = new Player(this.plate, this.ctx, this.sheet2);
         this.customer = new Customer(this.ctx, this.sheet4);
 
         //periodically invoke update function
@@ -113,11 +115,11 @@ var GameEngine = Class.extend({
         for(var i in this.letters) {
             this.letters[i].update();
 
-            //detect collisions between letters and the player
+            //detect collisions between letters and the plate
             if(this.detectCollision(this.letters[i].getBoundingBox(),
-                    this.player.getBoundingBox())) {
-                    this.player.collision(this.letters[i]);
-                    this.letters[i].collision(this.player);
+                    this.plate.getBoundingBox())) {
+                    this.plate.collision(this.letters[i]);
+                    this.letters[i].collision(this.plate);
             }
         }
 
