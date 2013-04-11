@@ -133,7 +133,7 @@ var GameEngine = Class.extend({
         //randomly spawn a letter
         if(Math.random() < 0.1) {
             this.letters.push(new Letter(this.ctx, this.sheet3,
-                    Math.floor(Math.random() * 640), 10));
+                    Math.floor(Math.random() * 640), 10, 'A'));
         }
 
         //clear old image
