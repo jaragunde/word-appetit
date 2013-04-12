@@ -88,7 +88,25 @@ var Customer = GameEntity.extend({
     //on collision with the player, the letters in the plate are stored
     collision: function (object) {
         if(object.type == 'player') {
-            this.letters = this.letters.concat(object.plate.letters);
+            var letters = object.plate.letters;
+            var points = 0;
+            for(var i in letters) {
+                //search the letter inside the goals array
+                var letter = letters[i].value;
+                var position = this.goal.indexOf(letter);
+                if(position > -1) {
+                    //this letter is not part of the goal any more
+                    this.goal.splice(position, 1);
+                    //add 100 points per letter
+                    points += 100;
+                }
+                else {
+                    //remove 50 points per repeated letter
+                    points -= 50;
+                }
+            }
+            engine.score += points; //FIXME: hard-coded access to engine object
+            this.letters = this.letters.concat(letters);
             object.plate.reset();
         }
     },
