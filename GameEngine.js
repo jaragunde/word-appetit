@@ -34,6 +34,7 @@ var GameEngine = Class.extend({
     plate: null,
     customer: null,
     letters: [],
+    goal: ['C', 'O', 'W'],
 
     //object containing the state of the input keys
     inputArray: {
@@ -152,7 +153,7 @@ var GameEngine = Class.extend({
         //randomly spawn a letter
         if(Math.random() < 0.1) {
             this.letters.push(new Letter(this.ctx, this.sheet3,
-                    Math.floor(Math.random() * 640), 10, 'A'));
+                    Math.floor(Math.random() * 640), 10, this.getNextLetter()));
         }
 
         //clear old image
@@ -198,6 +199,11 @@ var GameEngine = Class.extend({
             return false;
 
         return true;
+    },
+
+    //returns the next letter that will fall
+    getNextLetter: function () {
+        return this.goal[Math.floor(Math.random()*this.goal.length)];
     },
 
     fpsIntervalId: null,
