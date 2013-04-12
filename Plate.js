@@ -104,4 +104,10 @@ var Plate = GameEntity.extend({
             i++;
         }
     },
+
+    //empty the plate
+    reset: function () {
+        this.letters = [];
+        this.lettersHeight = 0;
+    },
 });

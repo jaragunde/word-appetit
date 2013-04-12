@@ -52,4 +52,12 @@ var Customer = GameEntity.extend({
     getNextLetter: function () {
         return this.goal[Math.floor(Math.random()*this.goal.length)];
     },
+
+    //on collision with the player, the letters in the plate are stored
+    collision: function (object) {
+        if(object.type == 'player') {
+            this.letters = this.letters.concat(object.plate.letters);
+            object.plate.reset();
+        }
+    },
 });
