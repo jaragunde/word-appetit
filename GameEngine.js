@@ -35,6 +35,9 @@ var GameEngine = Class.extend({
     customer: null,
     letters: [],
 
+    //score
+    score: 0,
+
     //object containing the state of the input keys
     inputArray: {
         'up': false,
@@ -178,6 +181,9 @@ var GameEngine = Class.extend({
                 this.letters[i].draw();
             }
         }
+
+        //draw score
+        this.ctx.fillText('SCORE: ' + this.score, 15, 15);
 
         if(this.fpsCounter) {
             //code from @Phrogz at http://stackoverflow.com/questions/4787431/check-fps-in-js
