@@ -30,6 +30,9 @@ var Customer = GameEntity.extend({
     //letters on the table
     letters: [],
 
+    //letters that form the word we have to build (the goal)
+    goal: ['C', 'O', 'W'],
+
     //define the sprite on init because there is only one
     sprite: new Sprite({
         x: 0,
@@ -42,5 +45,11 @@ var Customer = GameEntity.extend({
         this.sprite.sheet = sheet;
 
         this._super(ctx);
+    },
+
+    //returns the next letter that will fall
+    //it is chosen among the letters of the goal word
+    getNextLetter: function () {
+        return this.goal[Math.floor(Math.random()*this.goal.length)];
     },
 });
