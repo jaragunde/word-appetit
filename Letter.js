@@ -29,17 +29,9 @@ var Letter = GameEntity.extend({
     //the letter represented by this object
     value: null,
 
-    //define the sprite on init because there is only one
-    sprite: new Sprite({
-        x: 3,
-        y: 3,
-        w: 16,
-        h: 15,
-    }),
-
     //position of sprites for letters in the sheet
     sprites: {
-        'A': [3,3 ],
+        'A': [3, 3],
         'B': [3 + 17, 3],
         'C': [3 + 17*2, 3],
         'D': [3 + 17*3, 3],
@@ -68,12 +60,16 @@ var Letter = GameEntity.extend({
     },
 
     init: function(ctx, sheet, x, y, value) {
-        this.sprite.sheet = sheet;
         this.x = x;
         this.y = y;
         this.value = value;
-        this.sprite.x = this.sprites[value][0];
-        this.sprite.y = this.sprites[value][1];
+        this.sprite = new Sprite({
+            x: this.sprites[value][0],
+            y: this.sprites[value][1],
+            w: 16,
+            h: 15,
+            sheet: sheet,
+        });
 
         this._super(ctx);
     },
