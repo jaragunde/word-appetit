@@ -85,7 +85,7 @@ var GameEngine = Class.extend({
         //player, plate and customer objects
         this.plate = new Plate(this.ctx);
         this.player = new Player(this.plate, this.ctx, this.sheet2);
-        this.customer = new Customer(this.ctx, this.sheet4);
+        this.customer = new Customer(this.ctx, this.sheet4, this.sheet3);
 
         //periodically invoke update function
         window.setInterval(function () {
@@ -129,6 +129,9 @@ var GameEngine = Class.extend({
     update: function () {
         //update player
         this.player.update(this.inputArray);
+
+        //update customer
+        this.customer.update();
 
         //update letters
         for(var i in this.letters) {

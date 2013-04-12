@@ -32,6 +32,12 @@ var Customer = GameEntity.extend({
 
     //letters that form the word we have to build (the goal)
     goal: ['C', 'O', 'W'],
+    goalLetterObjects: [],
+
+    //timer to show the goal word (milliseconds)
+    showGoalTimer: 5000,
+    timeElapsed: 0,
+    oldTimestamp: new Date(),
 
     //define the sprite on init because there is only one
     sprite: new Sprite({
@@ -41,10 +47,36 @@ var Customer = GameEntity.extend({
         h: 101,
     }),
 
-    init: function(ctx, sheet) {
+    init: function(ctx, sheet, lettersSheet) {
         this.sprite.sheet = sheet;
 
+        //init goal letter objects (to be shown when the customer orders)
+        var x = 20, y = 300;
+        for(var i in this.goal) {
+            this.goalLetterObjects.push(
+                    new Letter(ctx, lettersSheet, x, y, this.goal[i]));
+            x+=16;
+        }
+
         this._super(ctx);
+    },
+
+    update: function () {
+        if(this.timeElapsed < this.showGoalTimer) {
+            var timestamp = new Date();
+            this.timeElapsed += timestamp - this.oldTimestamp;
+            this.oldTimestamp = timestamp;
+        }
+    },
+
+    draw: function () {
+        if(this.timeElapsed < this.showGoalTimer) {
+            for(var i in this.goalLetterObjects) {
+                this.goalLetterObjects[i].draw();
+            }
+        }
+
+        this._super();
     },
 
     //returns the next letter that will fall
