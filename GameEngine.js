@@ -24,10 +24,8 @@ var GameEngine = Class.extend({
     //pointers to canvas, context and sheet
     canvas: null,
     ctx: null,
-    sheet1: null,
-    sheet2: null,
+    sheet: null,
     sheet3: null,
-    sheet4: null,
 
     //pointers to game objects
     player: null,
@@ -68,14 +66,10 @@ var GameEngine = Class.extend({
         this.ctx = this.canvas.getContext('2d');
 
         //sprite sheet
-        this.sheet1 = new Image();
-        this.sheet1.src = "resources/walk-sequence.png";
-        this.sheet2 = new Image();
-        this.sheet2.src = "resources/character-stand.png";
+        this.sheet = new Image();
+        this.sheet.src = "resources/sprites.png";
         this.sheet3 = new Image();
         this.sheet3.src = "resources/alphabet.png";
-        this.sheet4 = new Image();
-        this.sheet4.src = "resources/character-sitting.png";
 
         //input events
         this.canvas.addEventListener('keydown', function (event) {
@@ -87,8 +81,8 @@ var GameEngine = Class.extend({
 
         //player, plate and customer objects
         this.plate = new Plate(this.ctx);
-        this.player = new Player(this.plate, this.ctx, this.sheet2);
-        this.customer = new Customer(this.ctx, this.sheet4, this.sheet3);
+        this.player = new Player(this.plate, this.ctx, this.sheet);
+        this.customer = new Customer(this.ctx, this.sheet, this.sheet3);
 
         //periodically invoke update function
         window.setInterval(function () {

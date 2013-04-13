@@ -41,10 +41,10 @@ var Customer = GameEntity.extend({
 
     //define the sprite on init because there is only one
     sprite: new Sprite({
-        x: 0,
-        y: 0,
-        w: 75,
-        h: 101,
+        "x": 76,
+        "y": 68,
+        "w": 56,
+        "h": 40,
     }),
 
     init: function(ctx, sheet, lettersSheet) {
