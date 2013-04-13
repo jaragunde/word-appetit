@@ -79,12 +79,6 @@ var Customer = GameEntity.extend({
         this._super();
     },
 
-    //returns the next letter that will fall
-    //it is chosen among the letters of the goal word
-    getNextLetter: function () {
-        return this.goal[Math.floor(Math.random()*this.goal.length)];
-    },
-
     //on collision with the player, the letters in the plate are stored
     collision: function (object) {
         if(object.type == 'player') {

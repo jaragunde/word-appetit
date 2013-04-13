@@ -31,6 +31,7 @@ var GameEngine = Class.extend({
     player: null,
     plate: null,
     customer: null,
+    cook: null,
     letters: [],
 
     //score
@@ -83,6 +84,7 @@ var GameEngine = Class.extend({
         this.plate = new Plate(this.ctx);
         this.player = new Player(this.plate, this.ctx, this.sheet);
         this.customer = new Customer(this.ctx, this.sheet, this.sheetLetters);
+        this.cook = new Cook(this.ctx, this.sheet, this.sheetLetters);
 
         //periodically invoke update function
         window.setInterval(function () {
@@ -130,6 +132,9 @@ var GameEngine = Class.extend({
         //update customer
         this.customer.update();
 
+        //update cook
+        this.cook.update();
+
         //update letters
         for(var i in this.letters) {
             this.letters[i].update();
@@ -149,13 +154,6 @@ var GameEngine = Class.extend({
                 this.customer.collision(this.player);
         }
 
-        //randomly spawn a letter
-        if(Math.random() < 0.1) {
-            this.letters.push(new Letter(this.ctx, this.sheetLetters,
-                    Math.floor(Math.random() * 640), 10,
-                    this.customer.getNextLetter()));
-        }
-
         //clear old image
         this.ctx.fillStyle = '#8ED6FF';
         this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height);
@@ -166,6 +164,9 @@ var GameEngine = Class.extend({
 
         //draw customer
         this.customer.draw();
+
+        //draw cook
+        this.cook.draw();
 
         //draw letters in next position, or remove if destroyed
         for(var i in this.letters) {
