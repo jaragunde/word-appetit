@@ -157,7 +157,9 @@ var GameEngine = Class.extend({
         }
 
         //clear old image
-        this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height);
+        this.ctx.fillStyle = '#8ED6FF';
+        this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height);
+        this.ctx.fillStyle = '#000000';
 
         //draw player
         this.player.draw();
