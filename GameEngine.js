@@ -25,7 +25,7 @@ var GameEngine = Class.extend({
     canvas: null,
     ctx: null,
     sheet: null,
-    sheet3: null,
+    sheetLetters: null,
 
     //pointers to game objects
     player: null,
@@ -68,8 +68,8 @@ var GameEngine = Class.extend({
         //sprite sheet
         this.sheet = new Image();
         this.sheet.src = "resources/sprites.png";
-        this.sheet3 = new Image();
-        this.sheet3.src = "resources/alphabet.png";
+        this.sheetLetters = new Image();
+        this.sheetLetters.src = "resources/letters.png";
 
         //input events
         this.canvas.addEventListener('keydown', function (event) {
@@ -82,7 +82,7 @@ var GameEngine = Class.extend({
         //player, plate and customer objects
         this.plate = new Plate(this.ctx);
         this.player = new Player(this.plate, this.ctx, this.sheet);
-        this.customer = new Customer(this.ctx, this.sheet, this.sheet3);
+        this.customer = new Customer(this.ctx, this.sheet, this.sheetLetters);
 
         //periodically invoke update function
         window.setInterval(function () {
@@ -151,7 +151,7 @@ var GameEngine = Class.extend({
 
         //randomly spawn a letter
         if(Math.random() < 0.1) {
-            this.letters.push(new Letter(this.ctx, this.sheet3,
+            this.letters.push(new Letter(this.ctx, this.sheetLetters,
                     Math.floor(Math.random() * 640), 10,
                     this.customer.getNextLetter()));
         }
