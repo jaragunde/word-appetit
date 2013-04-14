@@ -26,7 +26,7 @@ var Player = GameEntity.extend({
     y: 422,
 
     //movement speed
-    speed: 3,
+    speed: 5,
 
     type: 'player',
 

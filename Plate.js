@@ -33,7 +33,7 @@ var Plate = GameEntity.extend({
     lettersHeight: 0,
 
     //plate width, it's configurable because it impacts in the difficulty
-    plateW: 80,
+    plateW: 40,
 
     init: function(ctx) {
 
@@ -41,7 +41,8 @@ var Plate = GameEntity.extend({
         this.plateHW = Math.floor(this.plateW / 2);
 
         //setup letter placeholders taking into account plate width
-        var letterW = 16;
+        var letterW = 10;
+        var letterH = 14;
         var dx = -1 * this.plateHW;
         var dy = 0;//this.sprite.cy;
         var x = Math.floor(letterW / 2);
@@ -55,7 +56,7 @@ var Plate = GameEntity.extend({
                 x += letterW;
             }
             x = Math.floor(letterW / 2);
-            y -= letterW;
+            y -= letterH;
         }
         this.lettersPerRow = Math.floor(this.plateW / letterW);
 
