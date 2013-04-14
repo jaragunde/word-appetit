@@ -100,6 +100,10 @@ var Customer = GameEntity.extend({
                 }
             }
             engine.score += points; //FIXME: hard-coded access to engine object
+            if(engine.score < 0) {
+                //don't allow negative scores
+                engine.score = 0;
+            }
             this.letters = this.letters.concat(letters);
             object.plate.reset();
         }
