@@ -33,20 +33,59 @@ var Player = GameEntity.extend({
     //pointer to plate object
     plate: null,
 
+    //animation definitions
+    animationDefinition: {
+        left: {
+            walking: ["barman-running-left-1", "barman-standing-left",
+                      "barman-running-left-2", "barman-standing-left"],
+            standing: ["barman-standing-left"],
+        },
+        right: {
+            walking: ["barman-running-right-1", "barman-standing-right",
+                      "barman-running-right-2", "barman-standing-right"],
+            standing: ["barman-standing-right"],
+        },
+    },
+    currentAnimation: null,
+    currentFrame: 0,
+    movingLeft: true,
+
     init: function(plate, ctx) {
-        this.sprite = spriteManager.sprites['barman-standing-left'];
+        this.currentAnimation = this.animationDefinition.left.standing;
         this.plate = plate;
         this._super(ctx);
     },
 
     update: function (inputArray) {
         //update position and sprite given input
+        //var nextFrame = this.animation.left.standing;
         if(inputArray.left) {
             this.x -= this.speed;
+            this.currentAnimation = this.animationDefinition.left.walking;
+            this.movingLeft = true;
         }
         if(inputArray.right) {
             this.x += this.speed;
+            if(inputArray.left) {
+                this.currentAnimation = this.animationDefinition.left.standing;
+            }
+            else {
+                this.currentAnimation = this.animationDefinition.right.walking;
+                this.movingLeft = false;
+            }
         }
+        if(!inputArray.left && !inputArray.right) {
+            if(this.movingLeft) {
+                this.currentAnimation = this.animationDefinition.left.standing;
+            }
+            else {
+                this.currentAnimation = this.animationDefinition.right.standing;
+            }
+        }
+        //update frame
+        this.currentFrame = ++this.currentFrame % this.currentAnimation.length;
+        this.sprite = spriteManager.sprites[this.currentAnimation[this.currentFrame]];
+
         this.plate.update(this.x, this.y + this.sprite.cy);
     },
 
