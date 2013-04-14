@@ -60,6 +60,7 @@ var GameEngine = Class.extend({
         'down': false,
         'left': false,
         'right': false,
+        'anyKey': false,
     },
 
     //game settings
@@ -137,6 +138,11 @@ var GameEngine = Class.extend({
             case 40: //down
                 this.inputArray.down = pressed;
                 break;
+            default:
+                if(this.levelFinished) {
+                    //anyKey is activated on key release
+                    this.inputArray.anyKey = !pressed;
+                }
         }
 
         return event.keyCode;
@@ -145,11 +151,12 @@ var GameEngine = Class.extend({
     update: function () {
         if(this.levelFinished) {
             //pause updates and drawing of gaming objects
-            if(!this.gameOver && this.inputArray.up) { //TODO: press any key to continue
+            if(!this.gameOver && this.inputArray.anyKey) {
                 this.levelFinished = false;
                 this.currentLevel++;
                 this.currentGoal = 0;
                 this.score = 0;
+                this.inputArray.anyKey = false;
             }
             return;
         }
