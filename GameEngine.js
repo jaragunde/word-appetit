@@ -37,6 +37,10 @@ var GameEngine = Class.extend({
     //score
     score: 0,
 
+    //level goals
+    levelGoals: [["H", "A", "M"], ["S", "O", "U", "P"], ["J", "A", "M"]],
+    currentGoal: 0,
+
     //object containing the state of the input keys
     inputArray: {
         'up': false,
@@ -205,6 +209,11 @@ var GameEngine = Class.extend({
             return false;
 
         return true;
+    },
+
+    //retrieves a new goal and advances the pointer
+    getNextGoal: function () {
+        return this.levelGoals[this.currentGoal++];
     },
 
     fpsIntervalId: null,

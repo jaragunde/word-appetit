@@ -31,8 +31,9 @@ var Customer = GameEntity.extend({
     letters: [],
 
     //letters that form the word we have to build (the goal)
-    goal: ['C', 'O', 'W'],
+    goal: [],
     goalLetterObjects: [],
+    lettersSheet: null,
 
     //timer to show the goal word (milliseconds)
     showGoalTimer: 5000,
@@ -49,19 +50,15 @@ var Customer = GameEntity.extend({
 
     init: function(ctx, sheet, lettersSheet) {
         this.sprite.sheet = sheet;
-
-        //init goal letter objects (to be shown when the customer orders)
-        var x = 20, y = 300;
-        for(var i in this.goal) {
-            this.goalLetterObjects.push(
-                    new Letter(ctx, lettersSheet, x, y, this.goal[i]));
-            x+=16;
-        }
+        this.lettersSheet = lettersSheet;
 
         this._super(ctx);
     },
 
     update: function () {
+        if(this.satisfied()) {
+            this.resetGoal(engine.getNextGoal());
+        }
         if(this.timeElapsed < this.showGoalTimer) {
             var timestamp = new Date();
             this.timeElapsed += timestamp - this.oldTimestamp;
@@ -102,6 +99,28 @@ var Customer = GameEntity.extend({
             engine.score += points; //FIXME: hard-coded access to engine object
             this.letters = this.letters.concat(letters);
             object.plate.reset();
+        }
+    },
+
+    //the customer is satisfied when it has received
+    //all the letters of the goal word
+    satisfied: function () {
+        return (this.goal.length == 0);
+    },
+
+    //set a new goal word
+    resetGoal: function (goal) {
+        this.goal = goal.slice();
+        this.timeElapsed = 0;
+        this.oldTimestamp = new Date();
+
+        //init goal letter objects (to be shown when the customer orders)
+        var x = 20, y = 300;
+        this.goalLetterObjects.length = 0;
+        for(var i in this.goal) {
+            this.goalLetterObjects.push(
+                    new Letter(this.ctx, this.lettersSheet, x, y, this.goal[i]));
+            x+=16;
         }
     },
 });

@@ -27,7 +27,7 @@ var Cook = GameEntity.extend({
 
     //letters that can spawn
     //(they are the letters from the goal and maybe some more)
-    lettersCooking: ['C', 'O', 'W', 'A'],
+    lettersCooking: ["H", "A", "M"],
     sheetLetters: null,
 
     //define the sprite on init because there is only one
