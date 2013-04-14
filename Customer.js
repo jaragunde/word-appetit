@@ -23,7 +23,7 @@
 var Customer = GameEntity.extend({
     //overwrite default x and y
     x: 40,
-    y: 430,
+    y: 204,
 
     type: 'customer',
 

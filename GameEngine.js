@@ -25,6 +25,9 @@ var GameEngine = Class.extend({
     canvas: null,
     ctx: null,
 
+    //sprite for the background
+    background: null,
+
     //pointers to game objects
     player: null,
     plate: null,
@@ -63,7 +66,7 @@ var GameEngine = Class.extend({
 
     //game settings
     screenWidth: 640,
-    screenHeight: 480,
+    screenHeight: 228,
     FPS: 1000 / 30,
 
     //members used to calculate FPS counter
@@ -95,6 +98,9 @@ var GameEngine = Class.extend({
         this.player = new Player(this.plate, this.ctx);
         this.customer = new Customer(this.ctx);
         this.cook = new Cook(this.ctx);
+
+        //background
+        this.background = spriteManager.sprites["background"];
 
         //periodically invoke update function
         window.setInterval(function () {
@@ -181,10 +187,8 @@ var GameEngine = Class.extend({
                 this.customer.collision(this.player);
         }
 
-        //clear old image
-        this.ctx.fillStyle = '#8ED6FF';
-        this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height);
-        this.ctx.fillStyle = '#000000';
+        //draw background, clearing the scene
+        this.background.draw(this.ctx, 320, 114);
 
         //draw player
         this.player.draw();

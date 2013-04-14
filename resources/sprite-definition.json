@@ -278,5 +278,12 @@
         "y": 16,
         "w": 8,
         "h": 12
+    },
+    "background": {
+        "sheet": "background.png",
+        "x": 0,
+        "y": 0,
+        "w": 640,
+        "h": 228
     }
 }

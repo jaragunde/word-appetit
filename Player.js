@@ -23,7 +23,7 @@
 var Player = GameEntity.extend({
     //overwrite default x and y
     x: 300,
-    y: 422,
+    y: 196,
 
     //movement speed
     speed: 5,
