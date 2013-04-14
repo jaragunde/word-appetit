@@ -57,7 +57,13 @@ var Customer = GameEntity.extend({
 
     update: function () {
         if(this.satisfied()) {
-            this.resetGoal(engine.getNextGoal());
+            var next = engine.getNextGoal();
+            if(next) {
+                this.resetGoal(next);
+            }
+            else {
+                engine.nextLevel();
+            }
         }
         if(this.timeElapsed < this.showGoalTimer) {
             var timestamp = new Date();
@@ -113,6 +119,8 @@ var Customer = GameEntity.extend({
         this.goal = goal.slice();
         this.timeElapsed = 0;
         this.oldTimestamp = new Date();
+
+        engine.cook.lettersCooking = goal.slice(); //FIXME c'mon, this is dirty
 
         //init goal letter objects (to be shown when the customer orders)
         var x = 20, y = 300;

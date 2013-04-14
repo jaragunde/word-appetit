@@ -216,6 +216,11 @@ var GameEngine = Class.extend({
         return this.levelGoals[this.currentGoal++];
     },
 
+    //check victory conditions and move to the next level
+    nextLevel: function () {
+        //TODO
+    },
+
     fpsIntervalId: null,
     enableFPSCounter: function (enabled) {
         this.fpsCounter = enabled;
