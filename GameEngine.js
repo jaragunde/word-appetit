@@ -37,9 +37,22 @@ var GameEngine = Class.extend({
     //score
     score: 0,
 
+    //levels definition
+    levelsDefinition: [
+        {
+            "targetScore": 500,
+            "words": [["H", "A", "M"], ["S", "O", "U", "P"], ["J", "A", "M"]],
+        },{
+            "targetScore": 900,
+            "words": [["S", "O", "U", "P"], ["B", "A", "C", "O", "N"], ["P", "O", "R", "K"]],
+        }
+    ],
+
     //level goals
-    levelGoals: [["H", "A", "M"], ["S", "O", "U", "P"], ["J", "A", "M"]],
+    currentLevel: 0,
     currentGoal: 0,
+    levelFinished: false,
+    gameOver: false,
 
     //object containing the state of the input keys
     inputArray: {
@@ -130,6 +143,17 @@ var GameEngine = Class.extend({
     },
 
     update: function () {
+        if(this.levelFinished) {
+            //pause updates and drawing of gaming objects
+            if(!this.gameOver && this.inputArray.up) { //TODO: press any key to continue
+                this.levelFinished = false;
+                this.currentLevel++;
+                this.currentGoal = 0;
+                this.score = 0;
+            }
+            return;
+        }
+
         //update player
         this.player.update(this.inputArray);
 
@@ -186,6 +210,26 @@ var GameEngine = Class.extend({
         //draw score
         this.ctx.fillText('SCORE: ' + this.score, 15, 15);
 
+        if(this.levelFinished) {
+            //the game has finished in this update, show score summary
+            var targetScore = this.levelsDefinition[this.currentLevel].targetScore;
+            this.ctx.fillText('TARGET SCORE: ' + targetScore, 15, 30);
+            if(targetScore <= this.score) {
+                if(this.currentLevel + 1 == this.levelsDefinition.length) {
+                    //there aren't more levels
+                this.ctx.fillText('CONGRATULATIONS!', 15, 45);
+                this.gameOver = true;
+                }
+                else {
+                    this.ctx.fillText('CONTINUE TO THE NEXT LEVEL!', 15, 45);
+                }
+            }
+            else {
+                this.ctx.fillText('GAME OVER', 15, 45);
+                this.gameOver = true;
+            }
+        }
+
         if(this.fpsCounter) {
             //code from @Phrogz at http://stackoverflow.com/questions/4787431/check-fps-in-js
             var thisFrameTime = (this.thisLoop=new Date) - this.lastLoop;
@@ -213,12 +257,13 @@ var GameEngine = Class.extend({
 
     //retrieves a new goal and advances the pointer
     getNextGoal: function () {
-        return this.levelGoals[this.currentGoal++];
-    },
-
-    //check victory conditions and move to the next level
-    nextLevel: function () {
-        //TODO
+        if(this.currentGoal < this.levelsDefinition[this.currentLevel].words.length) {
+            return this.levelsDefinition[this.currentLevel].words[this.currentGoal++];
+        }
+        else {
+            this.levelFinished = true;
+            return null;
+        }
     },
 
     fpsIntervalId: null,

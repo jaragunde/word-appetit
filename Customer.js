@@ -61,9 +61,6 @@ var Customer = GameEntity.extend({
             if(next) {
                 this.resetGoal(next);
             }
-            else {
-                engine.nextLevel();
-            }
         }
         if(this.timeElapsed < this.showGoalTimer) {
             var timestamp = new Date();
