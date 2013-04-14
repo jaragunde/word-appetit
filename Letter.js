@@ -29,47 +29,11 @@ var Letter = GameEntity.extend({
     //the letter represented by this object
     value: null,
 
-    //position of sprites for letters in the sheet
-    sprites: {
-        'A': [2, 2],
-        'B': [2 + 10, 2],
-        'C': [2 + 10*2, 2],
-        'D': [2 + 10*3, 2],
-        'E': [2 + 10*4, 2],
-        'F': [2 + 10*5, 2],
-        'G': [2 + 10*6, 2],
-        'H': [2 + 10*7, 2],
-        'I': [2 + 10*8, 2],
-        'J': [2 + 10*9, 2],
-        'K': [2 + 10*10, 2],
-        'L': [2 + 10*11, 2],
-        'M': [2 + 10*12, 2],
-        'N': [2, 16],
-        'O': [2 + 10, 16],
-        'P': [2 + 10*2, 16],
-        'Q': [2 + 10*3, 16],
-        'R': [2 + 10*4, 16],
-        'S': [2 + 10*5, 16],
-        'T': [2 + 10*6, 16],
-        'U': [2 + 10*7, 16],
-        'V': [2 + 10*8, 16],
-        'W': [2 + 10*9, 16],
-        'X': [2 + 10*10, 16],
-        'Y': [2 + 10*11, 16],
-        'Z': [2 + 10*12, 16],
-    },
-
-    init: function(ctx, sheet, x, y, value) {
+    init: function(ctx, x, y, value) {
         this.x = x;
         this.y = y;
         this.value = value;
-        this.sprite = new Sprite({
-            x: this.sprites[value][0],
-            y: this.sprites[value][1],
-            w: 8,
-            h: 12,
-            sheet: sheet,
-        });
+        this.sprite = spriteManager.sprites[value];
 
         this._super(ctx);
     },

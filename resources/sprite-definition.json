@@ -68,5 +68,187 @@
         "y": 68,
         "w": 24,
         "h": 28
+    },
+    "A": {
+        "sheet": "letters.png",
+        "x": 2,
+        "y": 2,
+        "w": 8,
+        "h": 12
+    },
+    "B": {
+        "sheet": "letters.png",
+        "x": 12,
+        "y": 2,
+        "w": 8,
+        "h": 12
+    },
+    "C": {
+        "sheet": "letters.png",
+        "x": 22,
+        "y": 2,
+        "w": 8,
+        "h": 12
+    },
+    "D": {
+        "sheet": "letters.png",
+        "x": 32,
+        "y": 2,
+        "w": 8,
+        "h": 12
+    },
+    "E": {
+        "sheet": "letters.png",
+        "x": 42,
+        "y": 2,
+        "w": 8,
+        "h": 12
+    },
+    "F": {
+        "sheet": "letters.png",
+        "x": 52,
+        "y": 2,
+        "w": 8,
+        "h": 12
+    },
+    "G": {
+        "sheet": "letters.png",
+        "x": 62,
+        "y": 2,
+        "w": 8,
+        "h": 12
+    },
+    "H": {
+        "sheet": "letters.png",
+        "x": 72,
+        "y": 2,
+        "w": 8,
+        "h": 12
+    },
+    "I": {
+        "sheet": "letters.png",
+        "x": 82,
+        "y": 2,
+        "w": 8,
+        "h": 12
+    },
+    "J": {
+        "sheet": "letters.png",
+        "x": 92,
+        "y": 2,
+        "w": 8,
+        "h": 12
+    },
+    "K": {
+        "sheet": "letters.png",
+        "x": 102,
+        "y": 2,
+        "w": 8,
+        "h": 12
+    },
+    "L": {
+        "sheet": "letters.png",
+        "x": 112,
+        "y": 2,
+        "w": 8,
+        "h": 12
+    },
+    "M": {
+        "sheet": "letters.png",
+        "x": 122,
+        "y": 2,
+        "w": 8,
+        "h": 12
+    },
+    "N": {
+        "sheet": "letters.png",
+        "x": 2,
+        "y": 16,
+        "w": 8,
+        "h": 12
+    },
+    "O": {
+        "sheet": "letters.png",
+        "x": 12,
+        "y": 16,
+        "w": 8,
+        "h": 12
+    },
+    "P": {
+        "sheet": "letters.png",
+        "x": 22,
+        "y": 16,
+        "w": 8,
+        "h": 12
+    },
+    "Q": {
+        "sheet": "letters.png",
+        "x": 32,
+        "y": 16,
+        "w": 8,
+        "h": 12
+    },
+    "R": {
+        "sheet": "letters.png",
+        "x": 42,
+        "y": 16,
+        "w": 8,
+        "h": 12
+    },
+    "S": {
+        "sheet": "letters.png",
+        "x": 52,
+        "y": 16,
+        "w": 8,
+        "h": 12
+    },
+    "T": {
+        "sheet": "letters.png",
+        "x": 62,
+        "y": 16,
+        "w": 8,
+        "h": 12
+    },
+    "U": {
+        "sheet": "letters.png",
+        "x": 72,
+        "y": 16,
+        "w": 8,
+        "h": 12
+    },
+    "V": {
+        "sheet": "letters.png",
+        "x": 82,
+        "y": 16,
+        "w": 8,
+        "h": 12
+    },
+    "W": {
+        "sheet": "letters.png",
+        "x": 92,
+        "y": 16,
+        "w": 8,
+        "h": 12
+    },
+    "X": {
+        "sheet": "letters.png",
+        "x": 102,
+        "y": 16,
+        "w": 8,
+        "h": 12
+    },
+    "Y": {
+        "sheet": "letters.png",
+        "x": 112,
+        "y": 16,
+        "w": 8,
+        "h": 12
+    },
+    "Z": {
+        "sheet": "letters.png",
+        "x": 122,
+        "y": 16,
+        "w": 8,
+        "h": 12
     }
 }

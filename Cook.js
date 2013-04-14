@@ -31,15 +31,13 @@ var Cook = GameEntity.extend({
     //letters that can spawn
     //(they are the letters from the goal and maybe some more)
     lettersCooking: [],
-    sheetLetters: null,
 
     //is the cook visible?
     //(it is only visible when a letter is going to be thrown)
     visible: false,
 
-    init: function(ctx, lettersSheet) {
+    init: function(ctx) {
         this.sprite = spriteManager.sprites["cook"];
-        this.sheetLetters = lettersSheet;
 
         //store precalculated value w
         this.w = this.maxX - this.minX;
@@ -51,8 +49,8 @@ var Cook = GameEntity.extend({
         //randomly spawn a letter
         if(Math.random() < 0.1) {
             var position = Math.floor(Math.random() * this.w) + this.minX;
-            engine.letters.push(new Letter(this.ctx, this.sheetLetters,
-                    position, 20, this.getNextLetter()));
+            engine.letters.push(new Letter(this.ctx, position, 20,
+                    this.getNextLetter()));
             this.x = position - 12;
             this.visible = true;
         }

@@ -33,16 +33,14 @@ var Customer = GameEntity.extend({
     //letters that form the word we have to build (the goal)
     goal: [],
     goalLetterObjects: [],
-    lettersSheet: null,
 
     //timer to show the goal word (milliseconds)
     showGoalTimer: 5000,
     timeElapsed: 0,
     oldTimestamp: new Date(),
 
-    init: function(ctx, lettersSheet) {
+    init: function(ctx) {
         this.sprite = spriteManager.sprites["customer-waiting"];
-        this.lettersSheet = lettersSheet;
 
         this._super(ctx);
     },
@@ -120,7 +118,7 @@ var Customer = GameEntity.extend({
         this.goalLetterObjects.length = 0;
         for(var i in this.goal) {
             this.goalLetterObjects.push(
-                    new Letter(this.ctx, this.lettersSheet, x, y, this.goal[i]));
+                    new Letter(this.ctx, x, y, this.goal[i]));
             x+=16;
         }
     },

@@ -21,10 +21,9 @@
  * Game engine object definition
  */
 var GameEngine = Class.extend({
-    //pointers to canvas, context and sheet
+    //pointers to canvas and context
     canvas: null,
     ctx: null,
-    sheetLetters: null,
 
     //pointers to game objects
     player: null,
@@ -83,10 +82,6 @@ var GameEngine = Class.extend({
         this.canvas.height = this.screenHeight;
         this.ctx = this.canvas.getContext('2d');
 
-        //sprite sheet
-        this.sheetLetters = new Image();
-        this.sheetLetters.src = "resources/letters.png";
-
         //input events
         this.canvas.addEventListener('keydown', function (event) {
             self.keyManager(event);
@@ -98,8 +93,8 @@ var GameEngine = Class.extend({
         //player, plate and customer objects
         this.plate = new Plate(this.ctx);
         this.player = new Player(this.plate, this.ctx);
-        this.customer = new Customer(this.ctx, this.sheetLetters);
-        this.cook = new Cook(this.ctx, this.sheetLetters);
+        this.customer = new Customer(this.ctx);
+        this.cook = new Cook(this.ctx);
 
         //periodically invoke update function
         window.setInterval(function () {
