@@ -20,5 +20,12 @@
 var engine;
 //start setup on windows load
 window.onload = function () {
-    engine = new GameEngine();
+    var timeoutId = window.setTimeout(function () {
+        if(spriteManager.ready) {
+            //start game engine when the sprites are ready
+            engine = new GameEngine();
+            //remove this timeout
+            window.clearTimeout(timeoutId);
+        }
+    }, 100);
 };
