@@ -22,12 +22,15 @@
  */
 var Cook = GameEntity.extend({
     y: 20,
+    //minimum and maximum positions for the x value
+    minX: 110,
+    maxX: 630,
 
     type: 'cook',
 
     //letters that can spawn
     //(they are the letters from the goal and maybe some more)
-    lettersCooking: ["H", "A", "M"],
+    lettersCooking: [],
     sheetLetters: null,
 
     //define the sprite on init because there is only one
@@ -46,13 +49,16 @@ var Cook = GameEntity.extend({
         this.sprite.sheet = sheet;
         this.sheetLetters = lettersSheet;
 
+        //store precalculated value w
+        this.w = this.maxX - this.minX;
+
         this._super(ctx);
     },
 
     update: function () {
         //randomly spawn a letter
         if(Math.random() < 0.1) {
-            var position = Math.floor(Math.random() * 640);
+            var position = Math.floor(Math.random() * this.w) + this.minX;
             engine.letters.push(new Letter(this.ctx, this.sheetLetters,
                     position, 20, this.getNextLetter()));
             this.x = position - 12;
