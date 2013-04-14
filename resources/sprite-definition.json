@@ -1,42 +1,70 @@
 {
-    "barman-running-left-1": {
+    "barman-standing-left": {
         "sheet": "sprites.png",
-        "x": 8,
+        "x": 4,
         "y": 4,
         "w": 40,
         "h": 56
     },
-    "barman-standing-left": {
+    "barman-running-left-1": {
         "sheet": "sprites.png",
-        "x": 60,
+        "x": 56,
         "y": 4,
         "w": 40,
         "h": 56
     },
     "barman-running-left-2": {
         "sheet": "sprites.png",
-        "x": 112,
+        "x": 108,
         "y": 4,
         "w": 40,
         "h": 56
     },
-    "barman-running-right-1": {
+    "barman-running-left-3": {
         "sheet": "sprites.png",
-        "x": 158,
+        "x": 160,
+        "y": 4,
+        "w": 40,
+        "h": 56
+    },
+    "barman-running-left-4": {
+        "sheet": "sprites.png",
+        "x": 212,
         "y": 4,
         "w": 40,
         "h": 56
     },
     "barman-standing-right": {
         "sheet": "sprites.png",
-        "x": 210,
+        "x": 472,
+        "y": 4,
+        "w": 40,
+        "h": 56
+    },
+    "barman-running-right-1": {
+        "sheet": "sprites.png",
+        "x": 420,
         "y": 4,
         "w": 40,
         "h": 56
     },
     "barman-running-right-2": {
         "sheet": "sprites.png",
-        "x": 262,
+        "x": 368,
+        "y": 4,
+        "w": 40,
+        "h": 56
+    },
+    "barman-running-right-3": {
+        "sheet": "sprites.png",
+        "x": 316,
+        "y": 4,
+        "w": 40,
+        "h": 56
+    },
+    "barman-running-right-4": {
+        "sheet": "sprites.png",
+        "x": 264,
         "y": 4,
         "w": 40,
         "h": 56

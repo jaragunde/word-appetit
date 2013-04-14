@@ -36,13 +36,11 @@ var Player = GameEntity.extend({
     //animation definitions
     animationDefinition: {
         left: {
-            walking: ["barman-running-left-1", "barman-standing-left",
-                      "barman-running-left-2", "barman-standing-left"],
+            walking: ["barman-running-left-2","barman-running-left-3","barman-running-left-4","barman-running-left-3","barman-running-left-2","barman-running-left-1"],
             standing: ["barman-standing-left"],
         },
         right: {
-            walking: ["barman-running-right-1", "barman-standing-right",
-                      "barman-running-right-2", "barman-standing-right"],
+            walking: ["barman-running-right-2","barman-running-right-3","barman-running-right-4","barman-running-right-3","barman-running-right-2","barman-running-right-1"],
             standing: ["barman-standing-right"],
         },
     },
