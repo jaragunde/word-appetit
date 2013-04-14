@@ -24,7 +24,6 @@ var GameEngine = Class.extend({
     //pointers to canvas, context and sheet
     canvas: null,
     ctx: null,
-    sheet: null,
     sheetLetters: null,
 
     //pointers to game objects
@@ -85,8 +84,6 @@ var GameEngine = Class.extend({
         this.ctx = this.canvas.getContext('2d');
 
         //sprite sheet
-        this.sheet = new Image();
-        this.sheet.src = "resources/sprites.png";
         this.sheetLetters = new Image();
         this.sheetLetters.src = "resources/letters.png";
 
@@ -100,9 +97,9 @@ var GameEngine = Class.extend({
 
         //player, plate and customer objects
         this.plate = new Plate(this.ctx);
-        this.player = new Player(this.plate, this.ctx, this.sheet);
-        this.customer = new Customer(this.ctx, this.sheet, this.sheetLetters);
-        this.cook = new Cook(this.ctx, this.sheet, this.sheetLetters);
+        this.player = new Player(this.plate, this.ctx);
+        this.customer = new Customer(this.ctx, this.sheetLetters);
+        this.cook = new Cook(this.ctx, this.sheetLetters);
 
         //periodically invoke update function
         window.setInterval(function () {

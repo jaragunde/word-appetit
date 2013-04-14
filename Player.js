@@ -30,19 +30,11 @@ var Player = GameEntity.extend({
 
     type: 'player',
 
-    //pointer to the sprites used to animate the ship
-    sprite: new Sprite({
-        "x": 60,
-        "y": 4,
-        "w": 40,
-        "h": 56,
-    }),
-
     //pointer to plate object
     plate: null,
 
-    init: function(plate, ctx, sheet) {
-        this.sprite.sheet = sheet;
+    init: function(plate, ctx) {
+        this.sprite = spriteManager.sprites['barman-standing-left'];
         this.plate = plate;
         this._super(ctx);
     },

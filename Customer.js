@@ -40,16 +40,8 @@ var Customer = GameEntity.extend({
     timeElapsed: 0,
     oldTimestamp: new Date(),
 
-    //define the sprite on init because there is only one
-    sprite: new Sprite({
-        "x": 76,
-        "y": 68,
-        "w": 56,
-        "h": 40,
-    }),
-
-    init: function(ctx, sheet, lettersSheet) {
-        this.sprite.sheet = sheet;
+    init: function(ctx, lettersSheet) {
+        this.sprite = spriteManager.sprites["customer-waiting"];
         this.lettersSheet = lettersSheet;
 
         this._super(ctx);

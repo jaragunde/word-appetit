@@ -33,20 +33,12 @@ var Cook = GameEntity.extend({
     lettersCooking: [],
     sheetLetters: null,
 
-    //define the sprite on init because there is only one
-    sprite: new Sprite({
-        "x": 219,
-        "y": 68,
-        "w": 24,
-        "h": 28,
-    }),
-
     //is the cook visible?
     //(it is only visible when a letter is going to be thrown)
     visible: false,
 
-    init: function(ctx, sheet, lettersSheet) {
-        this.sprite.sheet = sheet;
+    init: function(ctx, lettersSheet) {
+        this.sprite = spriteManager.sprites["cook"];
         this.sheetLetters = lettersSheet;
 
         //store precalculated value w
