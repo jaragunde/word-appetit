@@ -26,15 +26,17 @@ var Cook = GameEntity.extend({
     minX: 110,
     maxX: 630,
 
+    //movement speed
+    speed: 10,
+
     type: 'cook',
 
     //letters that can spawn
     //(they are the letters from the goal and maybe some more)
     lettersCooking: [],
 
-    //is the cook visible?
-    //(it is only visible when a letter is going to be thrown)
-    visible: false,
+    //direction to move (negative indicates to the left)
+    direction: -1,
 
     init: function(ctx) {
         this.sprite = spriteManager.sprites["cook"];
@@ -46,22 +48,25 @@ var Cook = GameEntity.extend({
     },
 
     update: function () {
+        //update position
+        this.x += this.speed * this.direction;
+        //if reached the limits, change direction
+        if(this.x < this.minX) {
+            this.x = this.minX;
+            this.direction *= -1;
+        }
+        else if(this.x > this.maxX) {
+            this.x = this.maxX;
+            this.direction *= -1;
+        }
+        else if(Math.random() < 0.05) {
+            //randomly change direction
+            this.direction *= -1;
+        }
         //randomly spawn a letter
         if(Math.random() < 0.1) {
-            var position = Math.floor(Math.random() * this.w) + this.minX;
-            engine.letters.push(new Letter(this.ctx, position, 20,
+            engine.letters.push(new Letter(this.ctx, this.x+12, 20,
                     this.getNextLetter()));
-            this.x = position - 12;
-            this.visible = true;
-        }
-        else {
-            this.visible = false;
-        }
-    },
-
-    draw: function () {
-        if(this.visible) {
-            this._super();
         }
     },
 
