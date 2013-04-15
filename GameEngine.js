@@ -84,6 +84,7 @@ var GameEngine = Class.extend({
         this.canvas.width = this.screenWidth;
         this.canvas.height = this.screenHeight;
         this.ctx = this.canvas.getContext('2d');
+        this.ctx.fillStyle = '#FFFFFF';
 
         //input events
         this.canvas.addEventListener('keydown', function (event) {
