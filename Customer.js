@@ -71,6 +71,7 @@ var Customer = GameEntity.extend({
             var next = engine.getNextGoal();
             if(next) {
                 this.resetGoal(next);
+                this.letters.length = 0;
             }
         }
         if(this.timeElapsed < this.showGoalTimer) {
