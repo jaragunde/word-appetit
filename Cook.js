@@ -21,7 +21,7 @@
  * Cook object definition
  */
 var Cook = GameEntity.extend({
-    y: 20,
+    y: 26,
     //minimum and maximum positions for the x value
     minX: 110,
     maxX: 630,
