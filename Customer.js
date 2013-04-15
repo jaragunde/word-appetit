@@ -87,6 +87,7 @@ var Customer = GameEntity.extend({
         if(object.type == 'player') {
             var letters = object.plate.letters;
             var points = 0;
+            var bonus = 0;
             for(var i in letters) {
                 //search the letter inside the goals array
                 var letter = letters[i].value;
@@ -94,8 +95,10 @@ var Customer = GameEntity.extend({
                 if(position > -1) {
                     //this letter is not part of the goal any more
                     this.goal.splice(position, 1);
-                    //add 100 points per letter
-                    points += 100;
+                    //add 100 points per letter + 10 * number of letters brought together
+                    points += 100 + 10 * bonus;
+                    //increase bonus
+                    bonus++;
                 }
                 else {
                     //remove 50 points per repeated letter
