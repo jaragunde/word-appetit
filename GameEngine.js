@@ -28,6 +28,9 @@ var GameEngine = Class.extend({
     //sprite for the background
     background: null,
 
+    //sprite for the presentation screen
+    presentation: null,
+
     //pointers to game objects
     player: null,
     plate: null,
@@ -53,7 +56,7 @@ var GameEngine = Class.extend({
     currentLevel: 0,
     currentGoal: 0,
     levelFinished: false,
-    gameOver: false,
+    gameOver: true,
 
     //object containing the state of the input keys
     inputArray: {
@@ -100,8 +103,9 @@ var GameEngine = Class.extend({
         this.customer = new Customer(this.ctx);
         this.cook = new Cook(this.ctx);
 
-        //background
+        //background and presentation
         this.background = spriteManager.sprites["background"];
+        this.presentation = spriteManager.sprites["presentation"];
 
         //periodically invoke update function
         window.setInterval(function () {
@@ -138,7 +142,7 @@ var GameEngine = Class.extend({
                 this.inputArray.down = pressed;
                 break;
             default:
-                if(this.levelFinished) {
+                if(this.levelFinished || this.gameOver) {
                     //anyKey is activated on key release
                     this.inputArray.anyKey = !pressed;
                 }
@@ -150,12 +154,33 @@ var GameEngine = Class.extend({
     update: function () {
         if(this.levelFinished) {
             //pause updates and drawing of gaming objects
-            if(!this.gameOver && this.inputArray.anyKey) {
-                this.levelFinished = false;
-                this.currentLevel++;
+            if(this.inputArray.anyKey) {
+                if(!this.gameOver) {
+                    //next level
+                    this.levelFinished = false;
+                    this.currentLevel++;
+                    this.currentGoal = 0;
+                    this.score = 0;
+                    this.inputArray.anyKey = false;
+                }
+                else {
+                    //return to main screen
+                    this.levelFinished = false;
+                    //prevent double press
+                    this.inputArray.anyKey = false;
+                }
+            }
+            return;
+        }
+        else if(this.gameOver) {
+            //we are in the presentation screen
+            this.presentation.draw(this.ctx, 320, 114);
+            if(this.inputArray.anyKey) {
+                this.currentLevel = 0;
                 this.currentGoal = 0;
                 this.score = 0;
                 this.inputArray.anyKey = false;
+                this.gameOver = false;
             }
             return;
         }

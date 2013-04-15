@@ -285,5 +285,12 @@
         "y": 0,
         "w": 640,
         "h": 228
+    },
+    "presentation": {
+        "sheet": "presentation.png",
+        "x": 0,
+        "y": 0,
+        "w": 640,
+        "h": 228
     }
 }
