@@ -49,6 +49,18 @@ var GameEngine = Class.extend({
         },{
             "targetScore": 900,
             "words": [["S", "O", "U", "P"], ["B", "A", "C", "O", "N"], ["P", "O", "R", "K"]],
+        },{
+            "targetScore": 1500,
+            "words": [["C", "H", "E", "E", "S", "E"], ["C", "H", "I", "C", "K", "E", "N"], ["S", "A", "L", "A", "D"]],
+        },{
+            "targetScore": 1900,
+            "words": [["H", "A", "M", "B", "U", "R", "G", "E", "R"], ["V", "E", "G", "E", "T", "A", "B", "L", "E", "S"]],
+        },{
+            "targetScore": 2200,
+            "words": [["S", "O", "U", "P"], ["C", "H", "I", "C", "K", "E", "N"], ["D", "E", "S", "S", "E", "R", "T"]],
+        },{
+            "targetScore": 2600,
+            "words": [["S", "P", "A", "M"], ["B", "A", "C", "O", "N"], ["S", "A", "U", "S", "A", "G", "E", "S"], ["S", "P", "A", "M"]],
         }
     ],
 
