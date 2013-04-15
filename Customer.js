@@ -30,6 +30,10 @@ var Customer = GameEntity.extend({
     //letters on the table
     letters: [],
 
+    //letter placeholders: positions where letters should be drawn
+    //when they are on the table
+    letterPlaceholders: [],
+
     //letters that form the word we have to build (the goal)
     goal: [],
     goalLetterObjects: [],
@@ -41,6 +45,23 @@ var Customer = GameEntity.extend({
 
     init: function(ctx) {
         this.sprite = spriteManager.sprites["customer-waiting"];
+
+        //setup letter placeholders
+        var letterW = 10;
+        var letterH = 14;
+        var x = 30;
+        var y = 194;
+        while(y > 40) {
+            while(x <= 60) {
+                this.letterPlaceholders.push({
+                    x: x,
+                    y: y,
+                });
+                x += letterW;
+            }
+            x = 30;
+            y -= letterH;
+        }
 
         this._super(ctx);
     },
@@ -121,5 +142,19 @@ var Customer = GameEntity.extend({
                     new Letter(this.ctx, x, y, this.goal[i]));
             x+=16;
         }
+    },
+
+    draw: function () {
+        //draw letters in placeholders
+        var i = 0;
+        while(i<this.letters.length && i<this.letterPlaceholders.length) {
+            var letter = this.letters[i];
+            letter.x = this.letterPlaceholders[i].x;
+            letter.y = this.letterPlaceholders[i].y;
+            letter.draw();
+            i++;
+        }
+        //draw sprite
+        this._super();
     },
 });
