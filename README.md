@@ -28,7 +28,11 @@ License
 -------
 
 The game itself and its art assets are licensed under the terms of Creative
-Commons Attribution-NonCommercial-ShareAlike 3.0 license. The code is licensed
-under the GNU General Public License, version 3.
+Commons Attribution-NonCommercial-ShareAlike 3.0 license. The sounds assets are
+not original and used under the terms of their respective licenses.
 
-See the files COPYING.art and COPYING.code for details.
+The code is licensed under the GNU General Public License, version 3. Some
+pieces of existing free software projects were used, see the headers of the
+individual files for details.
+
+See the files COPYING.art and COPYING.code for the legal text of the licenses.
