@@ -21,6 +21,7 @@
  * Cook object definition
  */
 var Cook = GameEntity.extend({
+    x: 110,
     y: 26,
     //minimum and maximum positions for the x value
     minX: 110,
@@ -74,5 +75,10 @@ var Cook = GameEntity.extend({
     //it is chosen among the letters of the goal word
     getNextLetter: function () {
         return this.lettersCooking[Math.floor(Math.random()*this.lettersCooking.length)];
+    },
+
+    reset: function () {
+        this.x = 110;
+        this.y = 26;
     },
 });

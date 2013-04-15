@@ -179,6 +179,9 @@ var GameEngine = Class.extend({
                 this.currentLevel = 0;
                 this.currentGoal = 0;
                 this.score = 0;
+                this.letters.length = 0;
+                this.player.reset();
+                this.cook.reset();
                 this.inputArray.anyKey = false;
                 this.gameOver = false;
             }

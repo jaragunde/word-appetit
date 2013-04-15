@@ -102,4 +102,9 @@ var Player = GameEntity.extend({
         //draw sprite
         this._super();
     },
+
+    reset: function () {
+        this.x = 300;
+        this.y = 196;
+    },
 });
