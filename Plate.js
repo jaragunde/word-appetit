@@ -74,6 +74,7 @@ var Plate = GameEntity.extend({
             this.letters.push(object);
             this.lettersHeight =
                     Math.floor(this.letters.length / this.lettersPerRow);
+            playSoundInstance('resources/sound/scale-e6.wav');
         }
     },
 

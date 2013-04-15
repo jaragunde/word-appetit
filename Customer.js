@@ -72,6 +72,7 @@ var Customer = GameEntity.extend({
             if(next) {
                 this.resetGoal(next);
                 this.letters.length = 0;
+                playSoundInstance('resources/sound/3-up-3.wav');
             }
         }
         if(this.timeElapsed < this.showGoalTimer) {

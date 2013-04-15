@@ -251,14 +251,17 @@ var GameEngine = Class.extend({
                     //there aren't more levels
                 this.ctx.fillText('CONGRATULATIONS!', 15, 45);
                 this.gameOver = true;
+                playSoundInstance('resources/sound/success-2.wav');
                 }
                 else {
                     this.ctx.fillText('CONTINUE TO THE NEXT LEVEL!', 15, 45);
+                playSoundInstance('resources/sound/success-2.wav');
                 }
             }
             else {
                 this.ctx.fillText('GAME OVER', 15, 45);
                 this.gameOver = true;
+                playSoundInstance('resources/sound/failure-2.wav');
             }
         }
 
