@@ -114,6 +114,8 @@ var GameEngine = Class.extend({
 
         //focus canvas to be able to receive keyboard events
         this.canvas.focus();
+
+        playSoundInstance('resources/sound/level-completed.wav');
     },
 
     keyManager: function (event) {
@@ -168,6 +170,7 @@ var GameEngine = Class.extend({
                     this.levelFinished = false;
                     //prevent double press
                     this.inputArray.anyKey = false;
+                    playSoundInstance('resources/sound/level-completed.wav');
                 }
             }
             return;
