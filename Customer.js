@@ -81,16 +81,6 @@ var Customer = GameEntity.extend({
         }
     },
 
-    draw: function () {
-        if(this.timeElapsed < this.showGoalTimer) {
-            for(var i in this.goalLetterObjects) {
-                this.goalLetterObjects[i].draw();
-            }
-        }
-
-        this._super();
-    },
-
     //on collision with the player, the letters in the plate are stored
     collision: function (object) {
         if(object.type == 'player') {
@@ -136,16 +126,30 @@ var Customer = GameEntity.extend({
         engine.cook.lettersCooking = goal.slice(); //FIXME c'mon, this is dirty
 
         //init goal letter objects (to be shown when the customer orders)
-        var x = 20, y = 300;
+        var x = 34, y = 175;
         this.goalLetterObjects.length = 0;
         for(var i in this.goal) {
             this.goalLetterObjects.push(
                     new Letter(this.ctx, x, y, this.goal[i]));
-            x+=16;
+            x+=10;
         }
+
+        //change sprite
+        this.sprite = spriteManager.sprites["customer-ordering-2"];
     },
 
     draw: function () {
+        //draw goal letters
+        if(this.timeElapsed < this.showGoalTimer) {
+            for(var i in this.goalLetterObjects) {
+                this.goalLetterObjects[i].draw();
+            }
+        }
+        else {
+            //change sprite if timer has expired
+            this.sprite = spriteManager.sprites["customer-waiting"];
+        }
+
         //draw letters in placeholders
         var i = 0;
         while(i<this.letters.length && i<this.letterPlaceholders.length) {
