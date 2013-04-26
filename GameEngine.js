@@ -104,9 +104,15 @@ var GameEngine = Class.extend({
         //input events
         this.canvas.addEventListener('keydown', function (event) {
             self.keyManager(event);
+            //stop event propagation
+            event.preventDefault();
+            return false;
         });
         this.canvas.addEventListener('keyup', function (event) {
             self.keyManager(event);
+            //stop event propagation
+            event.preventDefault();
+            return false;
         });
 
         //player, plate and customer objects
