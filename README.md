@@ -24,6 +24,12 @@ Use the arrows to move the waiter left and right. Letters will stack up as they
 fall on your plate, to deliver them just go to the customer's table.
 
 
+Code
+----
+
+Code hosted at [GitHub](https://github.com/jaragunde/word-appetit).
+
+
 License
 -------
 
