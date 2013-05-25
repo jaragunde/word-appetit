@@ -42,8 +42,16 @@ var SoundManager = Class.extend({
     pendingLoads: 0,
     finishedSendingLoads: false,
 
+    //is webaudio supported
+    unsupported: false,
+
     init: function () {
         this.initWebAudio();
+        if(this.unsupported) {
+            //its useless to continue loading anything
+            this.finishedSendingLoads = true;
+            return;
+        }
 
         var self = this;
         var xhr = new XMLHttpRequest();
@@ -72,6 +80,7 @@ var SoundManager = Class.extend({
         }
         catch(e) {
             alert('Web Audio API is not supported in this browser');
+            this.unsupported = true;
         }
     },
 
@@ -88,6 +97,10 @@ var SoundManager = Class.extend({
     },
 
     play: function (sound) {
+        if(this.unsupported) {
+            //do nothing
+            return;
+        }
         var buffer = this.clips[this.definitions[sound].file];
         var currentClip = this._context.createBufferSource();
         currentClip.buffer = buffer;
