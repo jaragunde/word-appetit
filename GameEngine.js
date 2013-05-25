@@ -133,13 +133,7 @@ var GameEngine = Class.extend({
         //focus canvas to be able to receive keyboard events
         this.canvas.focus();
 
-        playSoundInstance('resources/sound/level-completed.wav');
-
-        //start async load of the other sound resources
-        gSM.loadAsync('resources/sound/3-up-3.wav');
-        gSM.loadAsync('resources/sound/success-2.wav');
-        gSM.loadAsync('resources/sound/failure-2.wav');
-        gSM.loadAsync('resources/sound/scale-e6.wav');
+        soundManager.play("welcome");
     },
 
     keyManager: function (event) {
@@ -194,7 +188,7 @@ var GameEngine = Class.extend({
                     this.levelFinished = false;
                     //prevent double press
                     this.inputArray.anyKey = false;
-                    playSoundInstance('resources/sound/level-completed.wav');
+                    soundManager.play("welcome");
                 }
             }
             return;
@@ -276,19 +270,19 @@ var GameEngine = Class.extend({
             if(targetScore <= this.score) {
                 if(this.currentLevel + 1 == this.levelsDefinition.length) {
                     //there aren't more levels
-                this.ctx.fillText('CONGRATULATIONS!', 15, 45);
-                this.gameOver = true;
-                playSoundInstance('resources/sound/success-2.wav');
+                    this.ctx.fillText('CONGRATULATIONS!', 15, 45);
+                    this.gameOver = true;
+                    soundManager.play("level-clear");
                 }
                 else {
                     this.ctx.fillText('CONTINUE TO THE NEXT LEVEL!', 15, 45);
-                playSoundInstance('resources/sound/success-2.wav');
+                    soundManager.play("level-clear");
                 }
             }
             else {
                 this.ctx.fillText('GAME OVER', 15, 45);
                 this.gameOver = true;
-                playSoundInstance('resources/sound/failure-2.wav');
+                soundManager.play("game-over");
             }
         }
 
