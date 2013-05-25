@@ -1,0 +1,17 @@
+{
+    "welcome": {
+        "file": "level-completed.wav"
+    },
+    "order": {
+        "file": "3-up-3.wav"
+    },
+    "level-clear": {
+        "file": "success-2.wav"
+    },
+    "game-over": {
+        "file": "failure-2.wav"
+    },
+    "plate": {
+        "file": "scale-e6.wav"
+    }
+}
