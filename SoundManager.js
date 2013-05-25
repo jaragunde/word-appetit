@@ -38,6 +38,10 @@ var SoundManager = Class.extend({
     _context: null,
     _mainNode: null,
 
+    //ready state
+    pendingLoads: 0,
+    finishedSendingLoads: false,
+
     init: function () {
         this.initWebAudio();
 
@@ -75,10 +79,12 @@ var SoundManager = Class.extend({
         for(var i in this.definitions) {
             var def = this.definitions[i];
             if(!this.clips[def.file]) {
+                this.pendingLoads++;
                 loadSoundAsync(new String(i), new String(def.file), this);
                 //new strings are created to avoid passing by reference
             }
         }
+        this.finishedSendingLoads = true;
     },
 
     play: function (sound) {
@@ -90,6 +96,9 @@ var SoundManager = Class.extend({
         currentClip.loop = false;
         currentClip.noteOn(0);
     },
+    ready: function () {
+        return (this.finishedSendingLoads && (this.pendingLoads == 0));
+    }
 });
 
 function loadSoundAsync(name, file, soundManager) {
@@ -100,9 +109,11 @@ function loadSoundAsync(name, file, soundManager) {
         soundManager._context.decodeAudioData(request.response,
                 function (buffer) {
                     soundManager.clips[file] = buffer;
+                    soundManager.pendingLoads--;
                 },
                 function (data) {
                     console.log(data);
+                    soundManager.pendingLoads--;
                 });
     };
     request.send();
