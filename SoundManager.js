@@ -75,8 +75,9 @@ var SoundManager = Class.extend({
     initWebAudio: function () {
         try {
             this._context = new webkitAudioContext();
-            this._mainNode = this._context.createGainNode(0);
+            this._mainNode = this._context.createGainNode();
             this._mainNode.connect(this._context.destination);
+            this._mainNode.gain.value = 1;
         }
         catch(e) {
             alert('Web Audio API is not supported in this browser');
@@ -109,6 +110,30 @@ var SoundManager = Class.extend({
         currentClip.loop = false;
         currentClip.noteOn(0);
     },
+
+    toggleMute: function () {
+        if(this.unsupported) {
+            //do nothing
+            return;
+        }
+
+        if(this._mainNode.gain.value > 0) {
+            this.stopAll();
+            this._mainNode.gain.value = 0;
+        }
+        else {
+            this._mainNode.gain.value = 1;
+        }
+    },
+
+    stopAll: function ()
+    {
+        this._mainNode.disconnect();
+        this._mainNode = this._context.createGainNode();
+        this._mainNode.connect(this._context.destination);
+        this._mainNode.gain.value = 1;
+    },
+
     ready: function () {
         return (this.finishedSendingLoads && (this.pendingLoads == 0));
     }

@@ -161,6 +161,9 @@ var GameEngine = Class.extend({
             case 40: //down
                 this.inputArray.down = pressed;
                 break;
+            case 77: //M
+                soundManager.toggleMute();
+                //continue, if level finishes
             default:
                 if(this.levelFinished || this.gameOver) {
                     //anyKey is activated on key release
