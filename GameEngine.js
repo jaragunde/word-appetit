@@ -114,6 +114,12 @@ var GameEngine = Class.extend({
             event.preventDefault();
             return false;
         });
+        this.canvas.addEventListener("mousedown", function (e) {
+            self.mouseManager(e);
+        });
+        this.canvas.addEventListener("mouseup", function (e) {
+            self.mouseManager(e);
+        });
 
         //player, plate and customer objects
         this.plate = new Plate(this.ctx);
@@ -172,6 +178,27 @@ var GameEngine = Class.extend({
         }
 
         return event.keyCode;
+    },
+
+    mouseManager: function (event) {
+        let pressed = false;
+
+        //read event
+        if(event.type == 'mousedown') {
+            pressed = true;
+        }
+        if(event.type == 'mouseup') {
+            pressed = false;
+        }
+
+        let rect = this.canvas.getBoundingClientRect();
+        let x = event.clientX - rect.left;
+
+        if (x < this.screenWidth / 2) {
+            this.inputArray.left = pressed;
+        } else {
+            this.inputArray.right = pressed;
+        }
     },
 
     update: function () {
