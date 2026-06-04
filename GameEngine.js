@@ -114,6 +114,12 @@ var GameEngine = Class.extend({
             event.preventDefault();
             return false;
         });
+        this.canvas.addEventListener("mousedown", function (e) {
+            self.mouseManager(e);
+        });
+        this.canvas.addEventListener("mouseup", function (e) {
+            self.mouseManager(e);
+        });
 
         //player, plate and customer objects
         this.plate = new Plate(this.ctx);
@@ -133,13 +139,7 @@ var GameEngine = Class.extend({
         //focus canvas to be able to receive keyboard events
         this.canvas.focus();
 
-        playSoundInstance('resources/sound/level-completed.wav');
-
-        //start async load of the other sound resources
-        gSM.loadAsync('resources/sound/3-up-3.wav');
-        gSM.loadAsync('resources/sound/success-2.wav');
-        gSM.loadAsync('resources/sound/failure-2.wav');
-        gSM.loadAsync('resources/sound/scale-e6.wav');
+        soundManager.play("welcome");
     },
 
     keyManager: function (event) {
@@ -167,6 +167,9 @@ var GameEngine = Class.extend({
             case 40: //down
                 this.inputArray.down = pressed;
                 break;
+            case 77: //M
+                soundManager.toggleMute();
+                //continue, if level finishes
             default:
                 if(this.levelFinished || this.gameOver) {
                     //anyKey is activated on key release
@@ -175,6 +178,27 @@ var GameEngine = Class.extend({
         }
 
         return event.keyCode;
+    },
+
+    mouseManager: function (event) {
+        let pressed = false;
+
+        //read event
+        if(event.type == 'mousedown') {
+            pressed = true;
+        }
+        if(event.type == 'mouseup') {
+            pressed = false;
+        }
+
+        let rect = this.canvas.getBoundingClientRect();
+        let x = event.clientX - rect.left;
+
+        if (x < this.screenWidth / 2) {
+            this.inputArray.left = pressed;
+        } else {
+            this.inputArray.right = pressed;
+        }
     },
 
     update: function () {
@@ -194,7 +218,7 @@ var GameEngine = Class.extend({
                     this.levelFinished = false;
                     //prevent double press
                     this.inputArray.anyKey = false;
-                    playSoundInstance('resources/sound/level-completed.wav');
+                    soundManager.play("welcome");
                 }
             }
             return;
@@ -276,19 +300,19 @@ var GameEngine = Class.extend({
             if(targetScore <= this.score) {
                 if(this.currentLevel + 1 == this.levelsDefinition.length) {
                     //there aren't more levels
-                this.ctx.fillText('CONGRATULATIONS!', 15, 45);
-                this.gameOver = true;
-                playSoundInstance('resources/sound/success-2.wav');
+                    this.ctx.fillText('CONGRATULATIONS!', 15, 45);
+                    this.gameOver = true;
+                    soundManager.play("level-clear");
                 }
                 else {
                     this.ctx.fillText('CONTINUE TO THE NEXT LEVEL!', 15, 45);
-                playSoundInstance('resources/sound/success-2.wav');
+                    soundManager.play("level-clear");
                 }
             }
             else {
                 this.ctx.fillText('GAME OVER', 15, 45);
                 this.gameOver = true;
-                playSoundInstance('resources/sound/failure-2.wav');
+                soundManager.play("game-over");
             }
         }
 

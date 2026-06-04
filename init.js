@@ -21,11 +21,11 @@ var engine;
 //start setup on windows load
 window.onload = function () {
     var timeoutId = window.setTimeout(function () {
-        if(spriteManager.ready) {
+        if(spriteManager.ready && soundManager.ready()) {
             //start game engine when the sprites are ready
             engine = new GameEngine();
             //remove this timeout
             window.clearTimeout(timeoutId);
         }
-    }, 100);
+    }, 1000);
 };
