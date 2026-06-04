@@ -104,9 +104,15 @@ var GameEngine = Class.extend({
         //input events
         this.canvas.addEventListener('keydown', function (event) {
             self.keyManager(event);
+            //stop event propagation
+            event.preventDefault();
+            return false;
         });
         this.canvas.addEventListener('keyup', function (event) {
             self.keyManager(event);
+            //stop event propagation
+            event.preventDefault();
+            return false;
         });
 
         //player, plate and customer objects
@@ -128,6 +134,12 @@ var GameEngine = Class.extend({
         this.canvas.focus();
 
         playSoundInstance('resources/sound/level-completed.wav');
+
+        //start async load of the other sound resources
+        gSM.loadAsync('resources/sound/3-up-3.wav');
+        gSM.loadAsync('resources/sound/success-2.wav');
+        gSM.loadAsync('resources/sound/failure-2.wav');
+        gSM.loadAsync('resources/sound/scale-e6.wav');
     },
 
     keyManager: function (event) {

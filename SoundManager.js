@@ -25,13 +25,13 @@ SoundManager = Class.extend({
 		//WEBAUDIO API
 		 try {
 			this._context = new webkitAudioContext();
+			this._mainNode = this._context.createGainNode(0);
+			this._mainNode.connect(this._context.destination);
 		  }
 		  catch(e) {
 			alert('Web Audio API is not supported in this browser');
+			this.enabled = false;
 		  }
-		  
-		  this._mainNode = this._context.createGainNode(0);
-		  this._mainNode.connect(this._context.destination);
 	},
 	//----------------------------
 	loadAsync: function(path, callbackFcn)
@@ -41,6 +41,8 @@ SoundManager = Class.extend({
 			callbackFcn(this.clips[path].s);
 			return this.clips[path].s;
 		}
+		if( !gSM.enabled )
+			return false;
 		
 		var clip = {s:new Sound(),b:null,l:false};
 		this.clips[path] = clip;
