@@ -74,8 +74,8 @@ var SoundManager = Class.extend({
 
     initWebAudio: function () {
         try {
-            this._context = new webkitAudioContext();
-            this._mainNode = this._context.createGainNode();
+            this._context = new AudioContext();
+            this._mainNode = this._context.createGain();
             this._mainNode.connect(this._context.destination);
             this._mainNode.gain.value = 1;
         }
@@ -105,10 +105,9 @@ var SoundManager = Class.extend({
         var buffer = this.clips[this.definitions[sound].file];
         var currentClip = this._context.createBufferSource();
         currentClip.buffer = buffer;
-        currentClip.gain.value = 0.2;
         currentClip.connect(this._mainNode);
         currentClip.loop = false;
-        currentClip.noteOn(0);
+        currentClip.start();
     },
 
     toggleMute: function () {
