@@ -199,6 +199,12 @@ var GameEngine = Class.extend({
         } else {
             this.inputArray.right = pressed;
         }
+        if ((this.levelFinished || this.gameOver)) {
+            // unlike on keyboard, we activate anyKey with a mouse press,
+            // to prevent that the mouseup event to stop moving doubles as
+            // an anyKey input.
+            this.inputArray.anyKey = pressed;
+        }
     },
 
     update: function () {
