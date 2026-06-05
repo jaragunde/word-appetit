@@ -114,10 +114,10 @@ var GameEngine = Class.extend({
             event.preventDefault();
             return false;
         });
-        this.canvas.addEventListener("mousedown", function (e) {
+        this.canvas.addEventListener("pointerdown", function (e) {
             self.mouseManager(e);
         });
-        this.canvas.addEventListener("mouseup", function (e) {
+        this.canvas.addEventListener("pointerup", function (e) {
             self.mouseManager(e);
         });
 
@@ -183,11 +183,10 @@ var GameEngine = Class.extend({
     mouseManager: function (event) {
         let pressed = false;
 
-        //read event
-        if(event.type == 'mousedown') {
+        if(event.type == 'pointerdown') {
             pressed = true;
         }
-        if(event.type == 'mouseup') {
+        if(event.type == 'pointerup') {
             pressed = false;
         }
 
